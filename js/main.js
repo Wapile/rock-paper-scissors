@@ -27,12 +27,33 @@ function computerPlay() {
 
 }
 
-console.log(computerPlay());
-
-
 // Create playerPlay function
-// Prompt user for selection as string with no case sensitivity
-// Return selection as playerSelection variable
+function playerSelection() {
+
+    // Prompt user for selection as string with no case sensitivity
+    let selection = prompt("Rock, Paper or Scissors?", "");
+    
+    // Return selection based on input
+    if (selection.toLowerCase() === "rock") {
+        return "rock";
+    } 
+
+    else if (selection.toLowerCase() === "paper") {
+        return "paper";
+    }
+
+    else if (selection.toLowerCase() === "scissors") {
+        return "scissors";
+    }
+
+    // Notify user if input is incorrect
+    else {
+        alert("Please check spelling and try again.")
+    }
+}
+
+console.log(playerSelection());
+
 // Create playRound function
 // Compare computerSelection and playerSelection to determine winner
 // Return result
