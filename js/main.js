@@ -28,7 +28,7 @@ function computerPlay() {
 }
 
 // Create playerPlay function
-function playerSelection() {
+function playerPlay() {
 
     // Prompt user for selection as string with no case sensitivity
     let selection = prompt("Rock, Paper or Scissors?", "");
@@ -52,11 +52,41 @@ function playerSelection() {
     }
 }
 
-console.log(playerSelection());
+
+// Set function returns to variables for later
+const computerSelection = computerPlay();
+const playerSelection = playerPlay();
+
+// Print computer and player selections
+console.log(`Computer Selection = ${computerSelection}`);
+console.log(`Your Selection = ${playerSelection}`);
 
 // Create playRound function
-// Compare computerSelection and playerSelection to determine winner
-// Return result
+function playRound() {
+
+    // Compare computerSelection and playerSelection to determine winner
+    // Return winner or tie
+    if (playerSelection === computerSelection) {
+        return "It's a tie! Go again.";
+    }
+
+    else if (
+        (playerSelection === "rock" && computerSelection === "scissors") ||
+        (playerSelection === "paper" && computerSelection === "rock") ||
+        (playerSelection === "scissors" && computerSelection === "paper")
+        ) {
+            return `You win! Your ${playerSelection} beats ${computerSelection}.`;
+        }
+
+    else {
+        return `You lose. Your ${playerSelection} loses to ${computerSelection}.`;
+    }
+
+}
+
+console.log(playRound());
+
+
 // Create game function that runs playRound function x5 times
 // console.log result of each round
 // console.log final winner out of 5 rounds
