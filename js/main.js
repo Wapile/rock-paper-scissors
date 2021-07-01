@@ -4,10 +4,8 @@
 let x = 0;
 let y = 0;
 
-// Set function returns to variables for later
-// const buttons = document.querySelectorAll('.button');
-// let computerSelection = computerPlay();
-// let playerSelection = playerPlay();
+const buttons = document.querySelectorAll('button');
+
 
 // // Create game function that runs playRound function x5 times
 // function game() {
@@ -15,19 +13,12 @@ let y = 0;
 //     for (i = 0; i < 100; i++) {
 
 
-// Create playRound function
-// function playRound() {
 
-
-// Create computerPlay function
+// computerPlay function gives randomized selection
 function computerPlay() {
 
-    // Create math random fuction returning number 0, 1 or 2
-    // Round number down to integer
     randomizer = Math.floor(Math.random() * 3);
 
-    // Assign Rock/Paper/Scissor value based on returned integer
-    // Return result of random selection
     if (randomizer === 0) {
         return "rock";
     }
@@ -41,18 +32,9 @@ function computerPlay() {
     }
 }
 
+// playerPlay function converts button input to lowercase variable
+function playerPlay(selection) {
 
-// Create playerPlay function
-function playerPlay() {
-
-    // btn1.addEventListener('click', () => {
-    //     selection = "rock";
-    // });
-
-    // Prompt user for selection as string with no case sensitivity
-    let selection = prompt("Rock, Paper or Scissors?", "");
-    
-    // Return selection based on input
     if (selection.toLowerCase() === "rock") {
        return "rock";
     } 
@@ -64,26 +46,36 @@ function playerPlay() {
     else if (selection.toLowerCase() === "scissors") {
        return "scissors";
     }
-
-    // Notify user if input is incorrect
-    else {
-       alert("Please check spelling and try again.")
-    }
-}
+};
 
 
-const computerSelection = computerPlay();
-const playerSelection = playerPlay();
+let computerSelection = '';
+let playerSelection = '';
+
+buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+        playerSelection = button.textContent;
+        playerPlay(playerSelection);
+        computerSelection = computerPlay();
+        playRound();
+    });
+});
+
+// const playerSelection = playerPlay();
 
 
 // Print computer and player selections
-console.log(`Computer Selection = ${computerSelection}`);
-console.log(`Your Selection = ${playerSelection}`);
+// console.log(`Computer Selection = ${computerSelection}`);
+// console.log(`Your Selection = ${playerSelection}`);
 
 
 // Compare computerSelection and playerSelection to determine winner
 // Return winner or tie
 function playRound(result) {
+
+    console.log(`Computer Selection = ${computerSelection}`);
+    console.log(`Your Selection = ${playerSelection}`);
+
     if (playerSelection === computerSelection) {
         return "It's a tie! Go again.";
     }
@@ -103,7 +95,7 @@ function playRound(result) {
     }
 }
 
-console.log(playRound());
+// console.log(playRound());
 
 
 
