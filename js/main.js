@@ -9,13 +9,15 @@ let computerSelection = '';
 let playerSelection = '';
 
 const buttons = document.querySelectorAll('button');
+const divButtons = document.querySelector('#divButtons');
 
 const container = document.querySelector('#container');
-// divResults.classList.add('results');
 const score = document.createElement('div');
 const divResults = document.createElement('div');
+const winner = document.createElement('div');
 container.appendChild(score);
 container.appendChild(divResults);
+container.appendChild(winner);
 
 
 
@@ -65,9 +67,15 @@ function playerPlay(selection) {
 buttons.forEach((button) => {
     button.addEventListener('click', () => {
         playerSelection = playerPlay(button.textContent);
-        // playerPlay(playerSelection);
-        computerSelection = computerPlay();
+        computerSelection = computerPlay(); 
         playRound();
+        if (x === 5) {
+            divResults.textContent = "You're first to 5! You win this time!  Refresh to play again."
+            divButtons.remove();
+        } else if (y === 5) {
+            divResults.textContent = "Uh oh :( Computer beat you to 5 wins.  Refresh to try again."
+            divButtons.remove();
+        } 
     });
 });
 
@@ -82,9 +90,6 @@ buttons.forEach((button) => {
 // Compare computerSelection and playerSelection to determine winner
 // Return winner or tie
 function playRound(result) {
-
-    console.log(`Computer Selection = ${computerSelection}`);
-    console.log(`Your Selection = ${playerSelection}`);
 
     if (playerSelection === computerSelection) {
         divResults.textContent = "It's a tie! Go again.";
@@ -106,6 +111,12 @@ function playRound(result) {
     
     score.textContent = `CURRENT SCORE -- You: ${x}  Computer: ${y}`;
 }
+
+
+// console.log(`Computer Selection = ${computerSelection}`);
+// console.log(`Your Selection = ${playerSelection}`);
+
+
 
 // console.log(playRound());
 
