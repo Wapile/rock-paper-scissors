@@ -1,10 +1,23 @@
 
 
-// Set score variables to track score outside of function for global scope
+// Set variables and query selectors
+
 let x = 0;
 let y = 0;
 
+let computerSelection = '';
+let playerSelection = '';
+
 const buttons = document.querySelectorAll('button');
+
+const container = document.querySelector('#container');
+// divResults.classList.add('results');
+const score = document.createElement('div');
+const divResults = document.createElement('div');
+container.appendChild(score);
+container.appendChild(divResults);
+
+
 
 
 // // Create game function that runs playRound function x5 times
@@ -46,16 +59,13 @@ function playerPlay(selection) {
     else if (selection.toLowerCase() === "scissors") {
        return "scissors";
     }
-};
+}
 
-
-let computerSelection = '';
-let playerSelection = '';
 
 buttons.forEach((button) => {
     button.addEventListener('click', () => {
-        playerSelection = button.textContent;
-        playerPlay(playerSelection);
+        playerSelection = playerPlay(button.textContent);
+        // playerPlay(playerSelection);
         computerSelection = computerPlay();
         playRound();
     });
@@ -77,7 +87,7 @@ function playRound(result) {
     console.log(`Your Selection = ${playerSelection}`);
 
     if (playerSelection === computerSelection) {
-        return "It's a tie! Go again.";
+        divResults.textContent = "It's a tie! Go again.";
     }
 
     else if (
@@ -86,13 +96,15 @@ function playRound(result) {
         (playerSelection === "scissors" && computerSelection === "paper")
     ) {
         x = ++x;
-        return `You win! Your ${playerSelection} beats ${computerSelection}.`;
+        divResults.textContent = `You win! Your ${playerSelection} beats ${computerSelection}.`;
     }
 
     else {
         y = ++y;
-        return `You lose. Your ${playerSelection} loses to ${computerSelection}.`;
+        divResults.textContent = `You lose. Your ${playerSelection} loses to ${computerSelection}.`;
     }
+    
+    score.textContent = `CURRENT SCORE -- You: ${x}  Computer: ${y}`;
 }
 
 // console.log(playRound());
